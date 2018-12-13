@@ -1,18 +1,20 @@
 package lv.services;
 
-import lv.Database.Database;
+import lv.Database.TaskRepository;
 import lv.domain.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class PrintTaskListService {
-    Database database;
 
-    public PrintTaskListService(Database database) {
-        this.database = database;
-    }
+    @Autowired
+    TaskRepository database;
 
-    public List<Task> getAllTasks(){
+
+    public List<Task> getAllTasks() {
         return database.getAllTasks();
     }
 }

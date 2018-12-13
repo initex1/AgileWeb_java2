@@ -1,14 +1,16 @@
 package lv.services;
 
-import lv.Database.Database;
+import lv.Database.TaskRepository;
 import lv.domain.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddTaskService {
-    private Database database;
 
-    public AddTaskService(Database database) {
-        this.database = database;
-    }
+    @Autowired
+    private TaskRepository database;
+
 
     public void add(String title) {
         Task task = new Task();

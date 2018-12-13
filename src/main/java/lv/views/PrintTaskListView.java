@@ -2,13 +2,15 @@ package lv.views;
 
 import lv.domain.Task;
 import lv.services.PrintTaskListService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrintTaskListView {
+
+    @Autowired
     PrintTaskListService printTaskListService;
 
-    public PrintTaskListView(PrintTaskListService printTaskListService) {
-        this.printTaskListService = printTaskListService;
-    }
 
     public  void execute(){
         int taskNumber = 1;

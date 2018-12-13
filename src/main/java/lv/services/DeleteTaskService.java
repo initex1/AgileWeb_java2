@@ -1,16 +1,18 @@
 package lv.services;
 
-import lv.Database.Database;
+import lv.Database.TaskRepository;
 import lv.domain.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class DeleteTaskService {
-    Database database;
 
-    public DeleteTaskService(Database database) {
-        this.database = database;
-    }
+    @Autowired
+    TaskRepository database;
+
 
     public boolean delete(String deleteTaskName) {
         Optional<Task> foundTask = database.findTaskByTitle(deleteTaskName);

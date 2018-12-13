@@ -1,15 +1,18 @@
 package lv.views;
 
 import lv.services.DeleteTaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class DeleteTaskView {
+
+    @Autowired
     DeleteTaskService deleteTaskService ;
 
-    public DeleteTaskView(DeleteTaskService deleteTaskService) {
-        this.deleteTaskService = deleteTaskService;
-    }
+
 
     public void execute() {
         Scanner scanner=new Scanner(System.in);

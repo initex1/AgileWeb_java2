@@ -1,13 +1,17 @@
 package lv;
 
-import lv.Database.Database;
+import lv.Database.TaskRepository;
 import lv.Database.InMemoryDatabase;
+import lv.Database.jdbc.TaskRepositoryImpl;
+import lv.config.SpringAppConfig;
 import lv.services.AddTaskService;
 import lv.services.DeleteTaskService;
 import lv.services.PrintTaskListService;
 import lv.views.AddTaskView;
 import lv.views.DeleteTaskView;
 import lv.views.PrintTaskListView;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Scanner;
 
@@ -16,14 +20,15 @@ public class ToDoManager {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Database database = new InMemoryDatabase();
-        AddTaskService addTaskService = new AddTaskService(database);
-        DeleteTaskService deleteTaskService = new DeleteTaskService(database);
-        PrintTaskListService printTaskListService = new PrintTaskListService(database);
 
-        AddTaskView addTaskView = new AddTaskView(addTaskService);
-        DeleteTaskView deleteTaskView = new DeleteTaskView(deleteTaskService);
-        PrintTaskListView printTaskListView = new PrintTaskListView(printTaskListService);
+
+        ApplicationContext context
+                = new AnnotationConfigApplicationContext(SpringAppConfig.class);
+
+        AddTaskView addTaskView = context.getBean(AddTaskView.class);
+        DeleteTaskView deleteTaskView = context.getBean(DeleteTaskView.class);
+        PrintTaskListView printTaskListView = context.getBean(PrintTaskListView.class);
+
 
         System.out.println("Hi! this is system for creating TO-Do list");
         printMenuOptions();
