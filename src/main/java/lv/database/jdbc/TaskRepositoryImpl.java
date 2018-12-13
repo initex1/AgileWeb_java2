@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class TaskRepositoryImpl extends JDBCRepository implements TaskRepository {
     @Override
     public void addTask(Task task) {
