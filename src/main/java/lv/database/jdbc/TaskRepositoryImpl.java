@@ -1,6 +1,6 @@
-package lv.Database.jdbc;
+package lv.database.jdbc;
 
-import lv.Database.TaskRepository;
+import lv.database.TaskRepository;
 import lv.domain.Task;
 import org.springframework.stereotype.Component;
 

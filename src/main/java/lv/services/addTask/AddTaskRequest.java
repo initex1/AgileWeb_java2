@@ -1,24 +1,13 @@
-package lv.domain;
+package lv.services.addTask;
 
-public class Task {
 
-    private Long id;
 
+public class AddTaskRequest {
     private String taskTitle;
 
-    public Task() {
-    }
 
-    public Task(String taskTitle) {
+    public AddTaskRequest(String taskTitle) {
         this.taskTitle = taskTitle;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTaskTitle() {
@@ -28,4 +17,6 @@ public class Task {
     public void setTaskTitle(String taskTitle) {
         this.taskTitle = taskTitle;
     }
+
+
 }

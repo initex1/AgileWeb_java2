@@ -1,12 +1,6 @@
 package lv;
 
-import lv.Database.TaskRepository;
-import lv.Database.InMemoryDatabase;
-import lv.Database.jdbc.TaskRepositoryImpl;
 import lv.config.SpringAppConfig;
-import lv.services.AddTaskService;
-import lv.services.DeleteTaskService;
-import lv.services.PrintTaskListService;
 import lv.views.AddTaskView;
 import lv.views.DeleteTaskView;
 import lv.views.PrintTaskListView;

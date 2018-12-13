@@ -1,4 +1,4 @@
-package lv.Database.jdbc;
+package lv.database.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

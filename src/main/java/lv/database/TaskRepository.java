@@ -1,4 +1,4 @@
-package lv.Database;
+package lv.database;
 
 import lv.domain.Task;
 
