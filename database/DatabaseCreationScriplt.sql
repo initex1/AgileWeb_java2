@@ -5,18 +5,61 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `java2_toDo` DEFAULT CHARACTER SET utf8 ;
 USE `java2_toDo` ;
 
-DROP TABLE IF EXISTS  `tasks`;
-
+DROP TABLE IF EXISTS  `tasks`, `users`, `task_lists`, `task_list_items`;
 
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `taskTitle` VARCHAR(32) NOT NULL,
-    PRIMARY KEY (`id`)
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1002;
 
+CREATE TABLE IF NOT EXISTS `task_lists` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+
+  `user_id` BIGINT NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+
+  INDEX `ix_task_lists_user_id`(`user_id`),
+  UNIQUE INDEX `ix_task_lists_user_id_title`(`user_id`, `title`),
+
+  `created_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1002;
+
+CREATE TABLE IF NOT EXISTS `task_list_items` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+
+  `task_list_id` BIGINT NOT NULL,
+    FOREIGN KEY (`task_list_id`) REFERENCES `task_lists`(`id`),
+    INDEX `ix_task_list_items_task_list_id`(`task_list_id`),
+
+   `task_id` BIGINT NOT NULL,
+    FOREIGN KEY (`task_id`) REFERENCES `tasks`(`id`),
+    INDEX `ix_task_list_items_task_id`(`task_id`),
+
+    `task_status` VARCHAR(100) NOT NULL,
+
+   PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1002;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

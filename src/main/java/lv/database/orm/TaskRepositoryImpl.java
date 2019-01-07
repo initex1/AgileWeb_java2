@@ -12,27 +12,25 @@ import java.util.Optional;
 
 @Component
 @Transactional
-public class TaskRepositoryImpl implements TaskRepository {
+public class TaskRepositoryImpl extends ORMRepository implements TaskRepository {
 
 
-    @Autowired
-    private SessionFactory session;
 
     @Override
     public void addTask(Task task) {
-        session.getCurrentSession().save(task);
+        session().save(task);
     }
 
     @Override
     public boolean deleteTask(Task task) {
-        session.getCurrentSession().delete(task);
+        session().delete(task);
         return true;
     }
 
     @Override
     public Optional<Task> findTaskByTitle(String taskTitle) {
         String query = "from Task t where t.taskTitle = :title";
-        Task task = (Task) session.getCurrentSession().createQuery(query)
+        Task task = (Task) session().createQuery(query)
                 .setParameter("title", taskTitle)
                 .uniqueResult();
         return Optional.ofNullable(task);
@@ -41,6 +39,8 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public List<Task> getAllTasks() {
         String query = "from Task t";
-        return session.getCurrentSession().createQuery(query).list();
+        return session().createQuery(query).list();
     }
+
+
 }

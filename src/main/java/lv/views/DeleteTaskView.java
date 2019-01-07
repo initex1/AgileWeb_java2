@@ -1,10 +1,10 @@
 package lv.views;
 
 import lv.domain.Task;
-import lv.services.Error;
-import lv.services.deleteTask.DeleteTaskRequest;
-import lv.services.deleteTask.DeleteTaskResponse;
-import lv.services.deleteTask.DeleteTaskService;
+import lv.services.TaskListError;
+import lv.services.tasks.deleteTask.DeleteTaskRequest;
+import lv.services.tasks.deleteTask.DeleteTaskResponse;
+import lv.services.tasks.deleteTask.DeleteTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class DeleteTaskView {
         if (response.isSuccess()) {
             System.out.println("You successfully deleted task with ID:" + response.getTaskId()+"\n");
         } else {
-            for (Error error : response.getErrors()) {
+            for (TaskListError error : response.getErrors()) {
                 System.out.println("Error:" + error.getDescription());
             }
         }

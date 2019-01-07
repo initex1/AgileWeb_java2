@@ -1,11 +1,11 @@
 package validation;
 
-import lv.services.Error;
-import lv.services.addTask.AddTaskRequest;
-import lv.services.addTask.validation.AddTaskValidator;
-import lv.services.addTask.validation.AddTaskValidatorImpl;
-import lv.services.addTask.validation.rules.AddDuplicateTaskTitleRule;
-import lv.services.addTask.validation.rules.AddEmptyTitleRule;
+import lv.services.TaskListError;
+import lv.services.tasks.addTask.AddTaskRequest;
+import lv.services.tasks.addTask.validation.AddTaskValidator;
+import lv.services.tasks.addTask.validation.AddTaskValidatorImpl;
+import lv.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
+import lv.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,12 +33,12 @@ public class AddTaskValidatorImplTest {
     @Test
     public void shouldReturnCollectAndReturnErrors() {
         Mockito.when(emptyTitleRule.execute("homework1"))
-                .thenReturn(Optional.of(new Error("title", "des")));
+                .thenReturn(Optional.of(new TaskListError("title", "des")));
 
         Mockito.when(duplicateProductTitleRule.execute("homework1"))
-                .thenReturn(Optional.of(new Error("title", "duplicate")));
+                .thenReturn(Optional.of(new TaskListError("title", "duplicate")));
 
-        List<Error> errors = validator.validate(
+        List<TaskListError> errors = validator.validate(
                 new AddTaskRequest("homework1")
         );
 

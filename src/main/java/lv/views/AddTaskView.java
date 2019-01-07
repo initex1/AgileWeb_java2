@@ -1,9 +1,9 @@
 package lv.views;
 
-import lv.services.Error;
-import lv.services.addTask.AddTaskRequest;
-import lv.services.addTask.AddTaskResponse;
-import lv.services.addTask.AddTaskService;
+import lv.services.TaskListError;
+import lv.services.tasks.addTask.AddTaskRequest;
+import lv.services.tasks.addTask.AddTaskResponse;
+import lv.services.tasks.addTask.AddTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class AddTaskView {
         if (response.isSuccess()) {
             System.out.println("You added new task-" + taskTitle + "\n");
         } else {
-            for (Error error : response.getErrors()) {
+            for (TaskListError error : response.getErrors()) {
                 System.out.println("Error:" + error.getDescription());
             }
         }

@@ -1,7 +1,7 @@
 package validation.rules;
 
-import lv.services.Error;
-import lv.services.addTask.validation.rules.AddEmptyTitleRule;
+import lv.services.TaskListError;
+import lv.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class EmptyTitleRuleTest {
 
     @Test
     public void shouldReturnErrorWhenTitleIsEmpty() {
-        Optional<Error> error = rule.execute("");
+        Optional<TaskListError> error = rule.execute("");
         assertEquals(error.isPresent(), true);
         assertEquals(error.get().getField(), "title");
         assertEquals(error.get().getDescription(), "Title field is empty");
@@ -29,7 +29,7 @@ public class EmptyTitleRuleTest {
 
     @Test
     public void shouldReturnErrorWhenTitleIsNull() {
-        Optional<Error> error = rule.execute(null);
+        Optional<TaskListError> error = rule.execute(null);
         assertEquals(error.isPresent(), true);
         assertEquals(error.get().getField(), "title");
         assertEquals(error.get().getDescription(), "Title field is empty");
@@ -37,7 +37,7 @@ public class EmptyTitleRuleTest {
 
     @Test
     public void shouldNotReturnErrorWhenTitleIsNotEmpty(){
-        Optional<Error> error = rule.execute("title");
+        Optional<TaskListError> error = rule.execute("title");
         assertEquals(error.isPresent(), false);
     }
 

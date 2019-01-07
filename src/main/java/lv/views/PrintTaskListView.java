@@ -1,9 +1,9 @@
 package lv.views;
 
 import lv.domain.Task;
-import lv.services.Error;
-import lv.services.getTask.PrintTaskListResponse;
-import lv.services.getTask.PrintTaskListService;
+import lv.services.TaskListError;
+import lv.services.tasks.getTask.PrintTaskListResponse;
+import lv.services.tasks.getTask.PrintTaskListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class PrintTaskListView {
                 taskNumber++;
             }
         } else {
-            for (Error error : response.getErrors()) {
+            for (TaskListError error : response.getErrors()) {
                 System.out.println("Error:" + error.getDescription());
             }
         }

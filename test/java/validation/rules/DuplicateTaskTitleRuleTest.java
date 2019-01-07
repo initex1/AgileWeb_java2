@@ -2,8 +2,8 @@ package validation.rules;
 
 import lv.database.TaskRepository;
 import lv.domain.Task;
-import lv.services.Error;
-import lv.services.addTask.validation.rules.AddDuplicateTaskTitleRule;
+import lv.services.TaskListError;
+import lv.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -29,7 +29,7 @@ public class DuplicateTaskTitleRuleTest {
         Mockito.when(repository.findTaskByTitle("homework1"))
                 .thenReturn(Optional.of(task));
 
-        Optional<Error> error = rule.execute("homework1");
+        Optional<TaskListError> error = rule.execute("homework1");
 
         assertEquals(error.isPresent(), true);
         assertEquals(error.get().getField(), "title");
@@ -43,14 +43,14 @@ public class DuplicateTaskTitleRuleTest {
         Mockito.when(repository.findTaskByTitle("homework1"))
                 .thenReturn(Optional.empty());
 
-        Optional<Error> error = rule.execute("homework1");
+        Optional<TaskListError> error = rule.execute("homework1");
 
         assertEquals(error.isPresent(), false);
     }
 
     @Test
     public void shouldReturnNoErrorIfProductTitleIsNull() {
-        Optional<Error> error = rule.execute(null);
+        Optional<TaskListError> error = rule.execute(null);
 
         assertEquals(error.isPresent(), false);
 
