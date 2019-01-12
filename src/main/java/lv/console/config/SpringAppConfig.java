@@ -1,4 +1,4 @@
-package lv.config;
+package lv.console.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
