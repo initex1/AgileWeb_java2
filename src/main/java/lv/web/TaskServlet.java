@@ -1,7 +1,7 @@
 package lv.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.domain.Task;
+import lv.console.domain.Task;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +20,7 @@ public class TaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         PrintWriter out = resp.getWriter();
 
         out.println(mapper.writeValueAsString(tasks));

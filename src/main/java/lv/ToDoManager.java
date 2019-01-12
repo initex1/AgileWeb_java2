@@ -1,9 +1,9 @@
 package lv;
 
-import lv.config.SpringAppConfig;
-import lv.views.AddTaskView;
-import lv.views.DeleteTaskView;
-import lv.views.PrintTaskListView;
+import lv.console.config.SpringAppConfig;
+import lv.console.views.AddTaskView;
+import lv.console.views.DeleteTaskView;
+import lv.console.views.PrintTaskListView;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
