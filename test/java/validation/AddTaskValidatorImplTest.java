@@ -1,11 +1,11 @@
 package validation;
 
-import lv.services.TaskListError;
-import lv.services.tasks.addTask.AddTaskRequest;
-import lv.services.tasks.addTask.validation.AddTaskValidator;
-import lv.services.tasks.addTask.validation.AddTaskValidatorImpl;
-import lv.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
-import lv.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
+import lv.console.services.TaskListError;
+import lv.console.services.tasks.addTask.AddTaskRequest;
+import lv.console.services.tasks.addTask.validation.AddTaskValidator;
+import lv.console.services.tasks.addTask.validation.AddTaskValidatorImpl;
+import lv.console.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
+import lv.console.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

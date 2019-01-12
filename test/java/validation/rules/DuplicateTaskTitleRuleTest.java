@@ -1,9 +1,9 @@
 package validation.rules;
 
-import lv.database.TaskRepository;
-import lv.domain.Task;
-import lv.services.TaskListError;
-import lv.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
+import lv.console.database.TaskRepository;
+import lv.console.domain.Task;
+import lv.console.services.TaskListError;
+import lv.console.services.tasks.addTask.validation.rules.AddDuplicateTaskTitleRule;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

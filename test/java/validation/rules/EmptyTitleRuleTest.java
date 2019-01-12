@@ -1,7 +1,7 @@
 package validation.rules;
 
-import lv.services.TaskListError;
-import lv.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
+import lv.console.services.TaskListError;
+import lv.console.services.tasks.addTask.validation.rules.AddEmptyTitleRule;
 import org.junit.Before;
 import org.junit.Test;
 
