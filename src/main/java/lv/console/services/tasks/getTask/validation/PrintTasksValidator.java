@@ -4,6 +4,6 @@ import lv.console.services.TaskListError;
 
 import java.util.List;
 
-public interface PrintTaskListValidator {
+public interface PrintTasksValidator {
     List<TaskListError>validate();
 }

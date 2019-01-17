@@ -1,6 +1,5 @@
 package lv.console.views;
 
-import lv.console.domain.Task;
 import lv.console.services.TaskListError;
 import lv.console.services.tasks.deleteTask.DeleteTaskRequest;
 import lv.console.services.tasks.deleteTask.DeleteTaskResponse;
@@ -37,9 +36,5 @@ public class DeleteTaskView {
 
     }
 
-    private void printTasks() {
-        for (Task task : deleteTaskService.getAllTasks()) {
-            System.out.println(task.getTaskTitle() );
-        }
-    }
+
 }

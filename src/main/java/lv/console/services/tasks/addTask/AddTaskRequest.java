@@ -1,7 +1,6 @@
 package lv.console.services.tasks.addTask;
 
 
-
 public class AddTaskRequest {
     private String taskTitle;
 

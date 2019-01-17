@@ -33,7 +33,7 @@ public class TaskList {
         this.user = user;
     }
 
-    public String getTaskTitle() {
+    public String getTaskListTitle() {
         return listTitle;
     }
 

@@ -1,7 +1,8 @@
-package lv.console.services.tasks.getTask.validation;
+package lv.console.services.taskLists.getTaskLists.validation;
 
 import lv.console.services.TaskListError;
-import lv.console.services.tasks.getTask.validation.rules.PrintTaskListEmptyRule;
+import lv.console.services.taskLists.getTaskLists.PrintTaskListRequest;
+import lv.console.services.taskLists.getTaskLists.validation.rules.PrintTaskListEmptyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +16,9 @@ public class PrintTaskListValidatorImpl implements PrintTaskListValidator {
     private PrintTaskListEmptyRule printTaskListEmptyRule;
 
     @Override
-    public List<TaskListError> validate() {
+    public List<TaskListError> validate(PrintTaskListRequest request) {
         List<TaskListError> errors = new ArrayList<>();
-        printTaskListEmptyRule.execute().ifPresent(errors::add);
+        printTaskListEmptyRule.execute(request.getUser()).ifPresent(errors::add);
         return errors;
     }
 }

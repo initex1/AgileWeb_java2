@@ -10,14 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class PrintTaskListEmptyRule {
+public class PrintTasksEmptyRule {
 
     @Autowired
     private TaskRepository database;
 
-    public PrintTaskListEmptyRule(TaskRepository database) {
-        this.database = database;
-    }
 
     public Optional<TaskListError> execute(){
         List<Task> tasks=database.getAllTasks();

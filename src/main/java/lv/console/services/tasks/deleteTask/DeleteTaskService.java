@@ -13,7 +13,7 @@ import java.util.List;
 public class DeleteTaskService {
 
     @Autowired
-    TaskRepository database;
+    private TaskRepository database;
 
     @Autowired
     private DeleteTaskValidator validator;
@@ -29,9 +29,5 @@ public class DeleteTaskService {
         Task task = database.findTaskByTitle(request.getTaskTitle()).get();
         database.deleteTask(task);
         return new DeleteTaskResponse(task.getId());
-    }
-
-    public List<Task> getAllTasks() {
-        return database.getAllTasks();
     }
 }

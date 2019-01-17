@@ -6,6 +6,7 @@ import lv.console.domain.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -17,12 +18,29 @@ public class TaskListRepositoryImpl extends ORMRepository implements TaskListRep
     }
 
     @Override
-    public Optional<TaskList> findByUserAndTitle(User user, String title) {
-        String query = "from TaskList tl where tl.title = :title and tl.user = :user";
-        TaskList shoppingList = (TaskList) session().createQuery(query)
-                .setParameter("title", title)
+    public void addTaskList(TaskList taskList) {
+        session().save(taskList);
+    }
+
+    @Override
+    public Optional<TaskList> findByUserAndTitle(User user, String listTitle) {
+        String query = "from TaskList tl where tl.listTitle = :listTitle and tl.user = :user";
+        TaskList taskList = (TaskList) session().createQuery(query)
+                .setParameter("listTitle", listTitle)
                 .setParameter("user", user)
                 .uniqueResult();
-        return Optional.ofNullable(shoppingList);
+        return Optional.ofNullable(taskList);
+    }
+
+    @Override
+    public List<TaskList> getAllTasks(User user) {
+        String query = "from TaskList tl where  tl.user = :user";
+        return session().createQuery(query).setParameter("user", user).list();
+    }
+
+    @Override
+    public boolean deleteTaskList(TaskList taskList) {
+        session().delete(taskList);
+        return true;
     }
 }

@@ -14,9 +14,6 @@ public class DeleteTaskNotFoundRule {
     @Autowired
     private TaskRepository database;
 
-    public DeleteTaskNotFoundRule(TaskRepository database) {
-        this.database = database;
-    }
 
     public Optional<TaskListError> execute(String title) {
 

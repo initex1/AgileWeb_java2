@@ -21,7 +21,7 @@ public class UserController {
     private GetUserService getUserService;
 
     @ResponseBody
-    @PostMapping(value = "/user")
+    @PostMapping(value = "/users")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         UserRegistrationRequest request = new UserRegistrationRequest(
                 userDTO.getLogin(), userDTO.getPassword()
@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public UserDTO getUser(@PathVariable("id") Long userId) {
         GetUserRequest request = new GetUserRequest(userId);
         GetUserResponse response = getUserService.get(request);

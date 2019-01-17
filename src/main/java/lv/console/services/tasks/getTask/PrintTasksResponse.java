@@ -5,13 +5,13 @@ import lv.console.services.TaskListError;
 
 import java.util.List;
 
-public class PrintTaskListResponse {
+public class PrintTasksResponse {
     private List<Task> tasks;
     private List<TaskListError> errors;
 
 
 
-    public PrintTaskListResponse(List<Task> tasks, List<TaskListError> errors) {
+    public PrintTasksResponse(List<Task> tasks, List<TaskListError> errors) {
         this.tasks = tasks;
         this.errors = errors;
     }
