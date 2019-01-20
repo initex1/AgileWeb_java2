@@ -7,7 +7,7 @@
  <!--
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>lv.web.HelloServlet</servlet-class>
+        <servlet-class>HelloServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>TaskServlet</servlet-name>
-        <servlet-class>lv.web.TaskServlet</servlet-class>
+        <servlet-class>TaskServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
