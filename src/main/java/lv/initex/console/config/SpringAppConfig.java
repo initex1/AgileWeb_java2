@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = {"lv"})
+@ComponentScan(basePackages = {"l.initex"})
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class SpringAppConfig {

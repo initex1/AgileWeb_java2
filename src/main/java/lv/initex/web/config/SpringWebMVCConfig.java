@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"lv.web"})
+@ComponentScan(basePackages = {"lv.initex.web"})
 public class SpringWebMVCConfig extends WebMvcConfigurerAdapter {
 
 /*
