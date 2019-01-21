@@ -39,6 +39,6 @@ public class DeleteTitleIsEmptyRuleTest {
     public void shouldNotReturnErrorIfTitleNotEmpty(){
         Optional<TaskListError> errors=rule.execute("title");
 
-        assertTrue(errors.isPresent());
+        assertFalse(errors.isPresent());
     }
 }
