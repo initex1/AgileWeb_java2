@@ -20,7 +20,7 @@ public class GetTasksEmptyRule {
     }
 
     public Optional<TaskListError> execute() {
-        List<Task> tasks = database.getAllTasks();
+        List<Task> tasks = database.findAll();
         if (tasks.isEmpty()) {
             TaskListError error = new TaskListError("User", "User don't have any task");
             return Optional.of(error);

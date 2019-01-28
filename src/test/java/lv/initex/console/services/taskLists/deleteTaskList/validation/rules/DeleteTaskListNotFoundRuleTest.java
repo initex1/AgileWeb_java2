@@ -2,9 +2,7 @@ package lv.initex.console.services.taskLists.deleteTaskList.validation.rules;
 
 import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
-import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,7 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteTaskListNotFoundRuleTest {
 
-    private User user;
+ //   private User user;
 
     @Mock
     private TaskListRepository database;
@@ -27,17 +25,17 @@ public class DeleteTaskListNotFoundRuleTest {
     @InjectMocks
     private DeleteTaskListNotFoundRule rule;
 
-    @Before
-    public void init() {
-        user = new User();
-    }
+//    @Before
+//    public void init() {
+//        user = new User();
+//    }
 
     @Test
     public void shouldReturnErrorIfTaskListNotFound() {
-        Mockito.when(database.findByUserAndTitle(user, "xxx"))
+        Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx"))
                 .thenReturn(Optional.empty());
 
-        Optional<TaskListError> errors = rule.execute(user, "xxx");
+        Optional<TaskListError> errors = rule.execute(new Long(1), "xxx");
 
         assertTrue(errors.isPresent());
     }
@@ -45,10 +43,10 @@ public class DeleteTaskListNotFoundRuleTest {
     @Test
     public void shouldNotReturnErrorIfTaskListFound() {
         TaskList taskList = new TaskList();
-        Mockito.when(database.findByUserAndTitle(user, "xxx"))
+        Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx"))
                 .thenReturn(Optional.of(taskList));
 
-        Optional<TaskListError> errors = rule.execute(user, "xxx");
+        Optional<TaskListError> errors = rule.execute(new Long(1), "xxx");
 
         assertFalse(errors.isPresent());
 

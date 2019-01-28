@@ -17,8 +17,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -48,7 +46,7 @@ public class GetTaskListItemsServiceTest {
 
     @Test
     public void shouldReturnTaskListItems() {
-        Mockito.when(database.getAllTaskListItems(taskList))
+        Mockito.when(database.getAllByTaskList(taskList))
                 .thenReturn(Arrays.asList(new TaskListItem()));
 
         GetTaskListItemsResponse response = service.getAllTaskListItems(request);
@@ -70,12 +68,12 @@ public class GetTaskListItemsServiceTest {
 
     @Test
     public void verifyThatDatabaseMethodWasCalledOnce() {
-        Mockito.when(database.getAllTaskListItems(taskList))
+        Mockito.when(database.getAllByTaskList(taskList))
                 .thenReturn(Arrays.asList(new TaskListItem()));
 
         GetTaskListItemsResponse response = service.getAllTaskListItems(request);
 
-        verify(database).getAllTaskListItems(taskList);
+        verify(database).getAllByTaskList(taskList);
     }
 
     @Test

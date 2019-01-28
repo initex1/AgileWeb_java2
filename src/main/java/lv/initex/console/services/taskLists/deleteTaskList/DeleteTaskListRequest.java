@@ -1,24 +1,22 @@
 package lv.initex.console.services.taskLists.deleteTaskList;
 
-import lv.initex.console.domain.User;
-
 public class DeleteTaskListRequest {
 
-    private User user;
+    private Long userId;
 
     private String taskListTitle;
 
-    public DeleteTaskListRequest(User user, String taskListTitle) {
-        this.user = user;
+    public DeleteTaskListRequest(Long userId, String taskListTitle) {
+        this.userId = userId;
         this.taskListTitle = taskListTitle;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTaskListTitle() {

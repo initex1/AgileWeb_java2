@@ -17,8 +17,8 @@ public class GetTaskListEmptyRule {
     @Autowired
     private TaskListRepository database;
 
-    public Optional<TaskListError> execute(User user) {
-        List<TaskList> taskList = database.getAllTasks(user);
+    public Optional<TaskListError> execute(Long userId) {
+        List<TaskList> taskList = database.findAllByUser(userId);
         if (taskList.isEmpty()) {
             TaskListError error = new TaskListError("List", "User don't have any taskList");
             return Optional.of(error);

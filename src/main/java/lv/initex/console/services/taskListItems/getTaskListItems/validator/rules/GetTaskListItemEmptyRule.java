@@ -18,7 +18,7 @@ public class GetTaskListItemEmptyRule {
     private TaskListItemRepository database;
 
     public Optional<TaskListError> execute(TaskList taskList ) {
-        List<TaskListItem> taskListItems = database.getAllTaskListItems(taskList);
+        List<TaskListItem> taskListItems = database.getAllByTaskList(taskList);
         if (taskListItems.isEmpty()) {
             TaskListError error = new TaskListError("List", "TaskListItem list is empty!");
             return Optional.of(error);

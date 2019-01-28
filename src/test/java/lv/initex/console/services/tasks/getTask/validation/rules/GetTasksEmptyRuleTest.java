@@ -35,7 +35,7 @@ public class GetTasksEmptyRuleTest {
 
     @Test
     public void shouldRNotReturnErrorNoTasks() {
-        Mockito.when(database.getAllTasks()).thenReturn(Arrays.asList(new Task("xxx")));
+        Mockito.when(database.findAll()).thenReturn(Arrays.asList(new Task("xxx")));
         Optional<TaskListError> error = rule.execute();
         assertEquals(false, error.isPresent());
     }

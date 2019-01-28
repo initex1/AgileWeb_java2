@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetTaskListEmptyRuleTest {
 
-    private User user;
+   // private User user;
 
     private TaskList taskList;
 
@@ -32,23 +32,23 @@ public class GetTaskListEmptyRuleTest {
 
     @Before
     public void init() {
-        user = new User();
+     //   user = new User();
         taskList = new TaskList();
     }
 
     @Test
     public void shouldReturnErrorList() {
-        Optional<TaskListError> errors = rule.execute(user);
+        Optional<TaskListError> errors = rule.execute(new Long(1));
 
         assertTrue(errors.isPresent());
     }
 
     @Test
     public void shouldNotReturnErrorList() {
-        Mockito.when(database.getAllTasks(user))
+        Mockito.when(database.findAllByUser(new Long(1)))
                 .thenReturn(Arrays.asList(taskList));
 
-        Optional<TaskListError> errors = rule.execute(user);
+        Optional<TaskListError> errors = rule.execute(new Long(1));
 
         assertFalse(errors.isPresent());
 

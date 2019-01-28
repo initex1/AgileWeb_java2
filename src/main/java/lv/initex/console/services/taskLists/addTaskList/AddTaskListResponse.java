@@ -6,10 +6,12 @@ import java.util.List;
 
 public class AddTaskListResponse {
     private Long taskListId;
+    private String taskListTitle;
     private List<TaskListError> errors;
 
-    public AddTaskListResponse(Long taskListId) {
+    public AddTaskListResponse(Long taskListId, String taskListTitle) {
         this.taskListId = taskListId;
+        this.taskListTitle = taskListTitle;
     }
 
     public AddTaskListResponse(List<TaskListError> errors) {
@@ -22,6 +24,14 @@ public class AddTaskListResponse {
 
     public void setTaskListId(Long taskListId) {
         this.taskListId = taskListId;
+    }
+
+    public String getTaskListTitle() {
+        return taskListTitle;
+    }
+
+    public void setTaskListTitle(String taskListTitle) {
+        this.taskListTitle = taskListTitle;
     }
 
     public List<TaskListError> getErrors() {

@@ -18,7 +18,7 @@ public class GetTaskListValidatorImpl implements GetTaskListValidator {
     @Override
     public List<TaskListError> validate(GetTaskListRequest request) {
         List<TaskListError> errors = new ArrayList<>();
-        getTaskListEmptyRule.execute(request.getUser()).ifPresent(errors::add);
+        getTaskListEmptyRule.execute(request.getUserId()).ifPresent(errors::add);
         return errors;
     }
 }

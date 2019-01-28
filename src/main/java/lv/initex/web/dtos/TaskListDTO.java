@@ -1,21 +1,32 @@
 package lv.initex.web.dtos;
 
-import lv.initex.console.domain.User;
+import lv.initex.console.domain.TaskList;
+import lv.initex.console.services.TaskListError;
+
+import java.util.List;
 
 public class TaskListDTO {
 
     private Long id;
-    private User user;
+    private Long userId;
     private String listTitle;
+    private List<TaskListError> error;
 
-    public TaskListDTO() {
-    }
-
-    public TaskListDTO(Long id, User user, String listTitle) {
+    public TaskListDTO(Long id){
         this.id = id;
-        this.user = user;
-        this.listTitle = listTitle;
     }
+
+    public TaskListDTO(Long id, Long userId, String listTitle) {
+        this.id = id;
+        this.userId=userId;
+        this.listTitle=listTitle;
+    }
+
+    public TaskListDTO(List<TaskListError> error) {
+        this.error = error;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -25,12 +36,12 @@ public class TaskListDTO {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getListTitle() {
@@ -39,5 +50,13 @@ public class TaskListDTO {
 
     public void setListTitle(String listTitle) {
         this.listTitle = listTitle;
+    }
+
+    public List<TaskListError> getError() {
+        return error;
+    }
+
+    public void setError(List<TaskListError> error) {
+        this.error = error;
     }
 }

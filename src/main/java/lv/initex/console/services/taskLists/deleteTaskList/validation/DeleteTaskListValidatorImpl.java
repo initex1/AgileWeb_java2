@@ -28,8 +28,8 @@ public class DeleteTaskListValidatorImpl implements DeleteTaskListValidator {
     public List<TaskListError> validate(DeleteTaskListRequest request) {
         List<TaskListError> errors = new ArrayList<>();
         deleteTaskListTitleEmtyRule.execute(request.getTaskListTitle()).ifPresent(errors::add);
-        deleteTaskListNoUserRule.execute(request.getUser()).ifPresent(errors::add);
-        deleteTaskListNotFoundRule.execute(request.getUser(), request.getTaskListTitle()).ifPresent(errors::add);
+        deleteTaskListNoUserRule.execute(request.getUserId()).ifPresent(errors::add);
+        deleteTaskListNotFoundRule.execute(request.getUserId(), request.getTaskListTitle()).ifPresent(errors::add);
         return errors;
     }
 }

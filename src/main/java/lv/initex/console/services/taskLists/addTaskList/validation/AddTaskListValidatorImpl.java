@@ -23,7 +23,7 @@ public class AddTaskListValidatorImpl implements AddTaskListValidator{
     @Override
     public List<TaskListError> validate(AddTaskListRequest request) {
         List<TaskListError> errors = new ArrayList<>();
-        addDuplicateTaskListtitleRule.execute(request.getUser(), request.getTaskListTitle()).ifPresent(errors::add);
+        addDuplicateTaskListtitleRule.execute(request.getUserId(), request.getTaskListTitle()).ifPresent(errors::add);
         addEmptyTaskListTitleRule.execute(request.getTaskListTitle()).ifPresent(errors::add);
         return errors;
     }

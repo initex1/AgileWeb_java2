@@ -37,12 +37,12 @@ public class DeleteTaskListValidatorImplTest {
     public void shouldReturnCollectAndReturnErrors() {
         User user = new User();
 
-        DeleteTaskListRequest request = new DeleteTaskListRequest(user, "xxx");
+        DeleteTaskListRequest request = new DeleteTaskListRequest(new Long(1), "xxx");
 
-        Mockito.when(deleteTaskListNoUserRule.execute(user))
+        Mockito.when(deleteTaskListNoUserRule.execute(request.getUserId()))
                 .thenReturn(Optional.of(new TaskListError("zzz", "aaa")));
 
-        Mockito.when(deleteTaskListNotFoundRule.execute(user, "xxx"))
+        Mockito.when(deleteTaskListNotFoundRule.execute(request.getUserId(), "xxx"))
                 .thenReturn(Optional.of(new TaskListError("xxx", "yyy")));
 
         Mockito.when(deleteTaskListTitleEmtyRule.execute("xxx"))

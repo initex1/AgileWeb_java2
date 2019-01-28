@@ -28,7 +28,7 @@ public class GetTasksService {
         if (!errors.isEmpty()) {
             return new GetTasksResponse(tasks, errors);
         }
-        tasks = database.getAllTasks();
+        tasks = database.findAll();
         GetTasksResponse response = new GetTasksResponse(tasks, errors);
         return response;
     }

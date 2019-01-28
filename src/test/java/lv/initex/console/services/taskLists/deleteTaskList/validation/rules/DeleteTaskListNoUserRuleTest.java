@@ -37,7 +37,7 @@ public class DeleteTaskListNoUserRuleTest {
         Mockito.when(database.findById(user.getId()))
                 .thenReturn(Optional.empty());
 
-        Optional<TaskListError> errors = rule.execute(user);
+        Optional<TaskListError> errors = rule.execute(user.getId());
 
         assertTrue(errors.isPresent());
     }
@@ -47,7 +47,7 @@ public class DeleteTaskListNoUserRuleTest {
         Mockito.when(database.findById(user.getId()))
                 .thenReturn(Optional.of(user));
 
-        Optional<TaskListError> errors = rule.execute(user);
+        Optional<TaskListError> errors = rule.execute(user.getId());
 
         assertFalse(errors.isPresent());
     }

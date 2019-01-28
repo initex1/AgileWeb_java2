@@ -1,20 +1,18 @@
 package lv.initex.console.services.taskLists.getTaskLists;
 
-import lv.initex.console.domain.User;
-
 public class GetTaskListRequest {
 
-    private User user;
+    private Long userId;
 
-    public GetTaskListRequest(User user) {
-        this.user = user;
+    public GetTaskListRequest(Long userId) {
+        this.userId = userId;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

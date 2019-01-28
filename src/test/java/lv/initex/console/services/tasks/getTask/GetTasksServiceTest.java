@@ -31,7 +31,7 @@ public class GetTasksServiceTest {
 
     @Test
     public void shouldReturnResponseWithTaskList() {
-        Mockito.when(database.getAllTasks())
+        Mockito.when(database.findAll())
                 .thenReturn(Arrays.asList(new Task("xxx")));
         GetTasksResponse response = service.getAllTasks();
         assertEquals(true, !response.getTasks().isEmpty());
@@ -49,7 +49,7 @@ public class GetTasksServiceTest {
     @Test
     public void verifyThatDatabaseMethodWasCalledOnce() {
         GetTasksResponse response = service.getAllTasks();
-        verify(database, times(1)).getAllTasks();
+        verify(database, times(1)).findAll();
     }
 
     @Test

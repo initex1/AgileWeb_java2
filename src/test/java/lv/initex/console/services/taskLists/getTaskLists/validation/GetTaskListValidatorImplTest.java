@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetTaskListValidatorImplTest {
 
-    private User user;
+  //  private User user;
 
     private GetTaskListRequest request;
 
@@ -32,13 +32,13 @@ public class GetTaskListValidatorImplTest {
 
     @Before
     public void init() {
-        user = new User();
-        request = new GetTaskListRequest(user);
+     //   user = new User();
+        request = new GetTaskListRequest(new Long(1));
     }
 
     @Test
     public void shouldReturnErrorList() {
-        Mockito.when(getTaskListEmptyRule.execute(user))
+        Mockito.when(getTaskListEmptyRule.execute(request.getUserId()))
                 .thenReturn(Optional.of(new TaskListError("User", "No such user")));
 
         List<TaskListError> errors = validator.validate(request);
@@ -50,7 +50,7 @@ public class GetTaskListValidatorImplTest {
 
     @Test
     public void shouldNotReturnErrorList() {
-        Mockito.when(getTaskListEmptyRule.execute(user))
+        Mockito.when(getTaskListEmptyRule.execute(request.getUserId()))
                 .thenReturn(Optional.empty());
 
         List<TaskListError> errors = validator.validate(request);

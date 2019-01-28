@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AddTaskListServiceTest {
 
-    private User user;
+  //  private User user;
 
     private AddTaskListRequest request;
 
@@ -43,8 +43,8 @@ public class AddTaskListServiceTest {
 
     @Before
     public void init() {
-        user = new User();
-        request = new AddTaskListRequest(user, "xxx");
+       // user = new User();
+        request = new AddTaskListRequest(new Long(1), "xxx");
     }
 
     @Test

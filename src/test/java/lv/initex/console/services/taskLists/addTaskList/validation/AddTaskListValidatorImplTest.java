@@ -32,12 +32,12 @@ public class AddTaskListValidatorImplTest {
     @Test
     public void shouldReturnCollectAndReturnErrors() {
         User user = new User();
-        AddTaskListRequest request=new AddTaskListRequest(user,"xxx");
+        AddTaskListRequest request=new AddTaskListRequest(new Long(1),"xxx");
 
         Mockito.when(addEmptyTaskListTitleRule.execute("xxx"))
                 .thenReturn(Optional.of(new TaskListError("title", "empty")));
 
-        Mockito.when((addDuplicateTaskListtitleRule.execute(user, "xxx")))
+        Mockito.when((addDuplicateTaskListtitleRule.execute(new Long(1), "xxx")))
                 .thenReturn(Optional.of(new TaskListError("title", "duplicate")));
 
         List<TaskListError> errors=validator.validate(request);

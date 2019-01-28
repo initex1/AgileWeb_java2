@@ -46,7 +46,7 @@ public class GetTaskListItemEmptyRuleTest {
 
     @Test
     public void shouldNotReturnError() {
-        Mockito.when(database.getAllTaskListItems(taskList))
+        Mockito.when(database.getAllByTaskList(taskList))
                 .thenReturn(Arrays.asList(new TaskListItem()));
 
         Optional<TaskListError> error = rule.execute(taskList);

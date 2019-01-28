@@ -16,7 +16,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("from Task t where t.taskTitle= :title")
     Optional<Task> findTaskByTitle(String taskName);
 
-    List<Task> getAllTasks();
+  //  List<Task> getAllTasks();
 
 
 }

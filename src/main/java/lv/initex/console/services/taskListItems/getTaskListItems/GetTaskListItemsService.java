@@ -22,7 +22,7 @@ public class GetTaskListItemsService {
         List<TaskListItem> taskList;
         List<TaskListError> errors = validator.validate(request);
 
-        taskList = database.getAllTaskListItems(request.getTaskList());
+        taskList = database.getAllByTaskList(request.getTaskList());
         GetTaskListItemsResponse response = new GetTaskListItemsResponse(taskList, errors);
         return response;
     }

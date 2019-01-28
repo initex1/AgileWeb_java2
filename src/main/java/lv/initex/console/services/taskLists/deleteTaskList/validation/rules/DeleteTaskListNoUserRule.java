@@ -14,9 +14,9 @@ public class DeleteTaskListNoUserRule {
     private UserRepository database;
 
 
-    public Optional<TaskListError> execute(User user) {
-        if (user != null) {
-            Optional<User> findUser = database.findById(user.getId());
+    public Optional<TaskListError> execute(Long userId) {
+        if (userId != null) {
+            Optional<User> findUser = database.findById(userId);
             if (!findUser.isPresent()) {
                 TaskListError error = new TaskListError("UserID", "No such user!");
                 return Optional.of(error);

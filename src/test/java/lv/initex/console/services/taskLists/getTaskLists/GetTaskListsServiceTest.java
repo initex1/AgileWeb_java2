@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class GetTaskListsServiceTest {
 
-    private User user;
+  //  private User user;
 
     private GetTaskListRequest request;
 
@@ -39,13 +39,13 @@ public class GetTaskListsServiceTest {
 
     @Before
     public void init() {
-        user = new User();
-        request = new GetTaskListRequest(user);
+  //     user = new User();
+        request = new GetTaskListRequest(new Long(1));
     }
 
     @Test
     public void shouldReturnTaskList() {
-        Mockito.when(database.getAllTasks(user))
+        Mockito.when(database.findAllByUser(request.getUserId()))
                 .thenReturn(Arrays.asList(new TaskList()));
 
         GetTaskListResponse response = service.getAllTaskLists(request);
@@ -67,11 +67,11 @@ public class GetTaskListsServiceTest {
 
     @Test
     public void verifyThatDatabaseMethodWasCalledOnce() {
-        Mockito.when(database.getAllTasks(user))
+        Mockito.when(database.findAllByUser(request.getUserId()))
                 .thenReturn(Arrays.asList(new TaskList()));
 
         GetTaskListResponse response = service.getAllTaskLists(request);
-        verify(database).getAllTasks(user);
+        verify(database).findAllByUser(request.getUserId());
     }
 
     @Test

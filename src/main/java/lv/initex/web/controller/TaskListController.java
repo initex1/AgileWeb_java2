@@ -1,6 +1,7 @@
 package lv.initex.web.controller;
 
 
+import lv.initex.console.domain.TaskList;
 import lv.initex.console.services.taskLists.addTaskList.AddTaskListRequest;
 import lv.initex.console.services.taskLists.addTaskList.AddTaskListResponse;
 import lv.initex.console.services.taskLists.addTaskList.AddTaskListService;
@@ -15,6 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 public class TaskListController {
 
@@ -25,37 +30,41 @@ public class TaskListController {
     private DeleteTaskListService deleteTaskListService;
 
     @Autowired
-    private GetTaskListsService printTaskListsService;
+    private GetTaskListsService getTaskListsService;
 
     @ResponseBody
-    @PostMapping(value = "/users/taskLists")
-    public ResponseEntity<TaskListDTO> add(@RequestBody TaskListDTO taskListDTO) {
+    @PostMapping(value = "/users/{id}/addTaskList")
+    public ResponseEntity<TaskListDTO> add(@PathVariable("id") Long userId, @RequestParam("title") String taskListTitle) {
 
-        AddTaskListRequest request = new AddTaskListRequest(
-                taskListDTO.getUser(), taskListDTO.getListTitle()
-        );
+        AddTaskListRequest request = new AddTaskListRequest(userId, taskListTitle);
         AddTaskListResponse response = addTaskListService.add(request);
-        taskListDTO.setId(response.getTaskListId());
-        return ResponseEntity.ok(taskListDTO);
+        return ResponseEntity.ok(new TaskListDTO(response.getTaskListId()));
     }
 
-    @ResponseBody
-    @DeleteMapping(value = "/users/taskLists")
-    public DeleteTaskListResponse delete(@RequestBody TaskListDTO taskListDTO) {
-        DeleteTaskListRequest request = new DeleteTaskListRequest(
-                taskListDTO.getUser(), taskListDTO.getListTitle()
-        );
+    // @ResponseBody
+    @DeleteMapping(value = "/users/{id}/deleteTaskList")
+    public TaskListDTO delete(@PathVariable("id") Long userId,@RequestParam("title") String taskListTitle) {
+        DeleteTaskListRequest request = new DeleteTaskListRequest(userId, taskListTitle);
         DeleteTaskListResponse response = deleteTaskListService.delete(request);
-        return response;
+        if (!response.getErrors().isEmpty()) {
+            return new TaskListDTO(response.getErrors());
+        }
+        return new TaskListDTO(response.getTaskListId());
     }
 
-    @ResponseBody
-    @GetMapping(value = "/users/taskLists")
-    public GetTaskListResponse getAllTaskLists(@RequestBody TaskListDTO taskListDTO) {
 
-        GetTaskListRequest request = new GetTaskListRequest(taskListDTO.getUser());
-        GetTaskListResponse response = printTaskListsService.getAllTaskLists(request);
-        return response;
+    @GetMapping(value = "/users/{id}/taskLists")
+    public List<TaskListDTO> getAllTaskLists(@PathVariable("id") Long userId) {
+
+        GetTaskListRequest request = new GetTaskListRequest(userId);
+        GetTaskListResponse response = getTaskListsService.getAllTaskLists(request);
+        if (!response.getErrors().isEmpty()) {
+            return Arrays.asList(new TaskListDTO(response.getErrors()));
+        }
+        List<TaskListDTO> list = new ArrayList<>();
+        for (TaskList taskList : response.getTaskList()) {
+            list.add(new TaskListDTO(taskList.getId(), taskList.getUser().getId(), taskList.getTaskListTitle()));
+        }
+        return list;
     }
-
 }

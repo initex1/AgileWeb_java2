@@ -23,7 +23,7 @@ public class GetTaskListsService {
         List<TaskList> taskList;
         List<TaskListError> errors = validator.validate(request);
 
-        taskList = database.getAllTasks(request.getUser());
+        taskList = database.findAllByUser(request.getUserId());
         GetTaskListResponse response = new GetTaskListResponse(taskList, errors);
         return response;
     }

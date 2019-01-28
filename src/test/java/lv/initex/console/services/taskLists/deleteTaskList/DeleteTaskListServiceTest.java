@@ -40,9 +40,9 @@ public class DeleteTaskListServiceTest {
 
     @Before
     public void init() {
-        user = new User();
+      //  user = new User();
         taskList = new TaskList();
-        request = new DeleteTaskListRequest(user, "xxx");
+        request = new DeleteTaskListRequest(new Long(1), "xxx");
     }
 
     @Test
@@ -60,7 +60,7 @@ public class DeleteTaskListServiceTest {
     public void shouldReturnResponseWithTaskListIdAndNoErrorsList() {
         taskList.setId(new Long(1));
 
-        Mockito.when(database.findByUserAndTitle(user, "xxx")).thenReturn(Optional.of(taskList));
+        Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx")).thenReturn(Optional.of(taskList));
 
         DeleteTaskListResponse response = service.delete(request);
 
@@ -84,10 +84,10 @@ public class DeleteTaskListServiceTest {
     public void verifyThatDatabaseMethodWasCalledOnce() {
         taskList.setId(new Long(1));
 
-        Mockito.when(database.findByUserAndTitle(user, "xxx")).thenReturn(Optional.of(taskList));
+        Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx")).thenReturn(Optional.of(taskList));
 
         DeleteTaskListResponse response = service.delete(request);
 
-        verify(database).findByUserAndTitle(user, "xxx");
+        verify(database).findByUserIdAndTitle(new Long(1), "xxx");
     }
 }

@@ -15,6 +15,6 @@ public interface TaskListItemRepository extends JpaRepository<TaskListItem,Long>
 
 
 
-    List<TaskListItem> getAllTaskListItems(TaskList taskList);
+    List<TaskListItem> getAllByTaskList(TaskList taskList);
 
 }

@@ -2,6 +2,7 @@ package lv.initex.console.services.taskLists.addTaskList;
 
 import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
+import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
 import lv.initex.console.services.taskLists.addTaskList.validation.AddTaskListValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,19 @@ public class AddTaskListService {
     @Autowired
     private AddTaskListValidator validator;
 
-    public AddTaskListResponse add(AddTaskListRequest request){
+    public AddTaskListResponse add(AddTaskListRequest request) {
         List<TaskListError> errors = validator.validate(request);
 
         if (!errors.isEmpty()) {
             return new AddTaskListResponse(errors);
         }
+        User user = new User();
+        user.setId(request.getUserId());
         TaskList taskList = new TaskList();
-        taskList.setUser(request.getUser());
+        taskList.setUser(user);
         taskList.setTaskTitle(request.getTaskListTitle());
         database.save(taskList);
 
-        return new AddTaskListResponse(taskList.getId());
+        return new AddTaskListResponse(taskList.getId(), taskList.getTaskListTitle());
     }
 }
