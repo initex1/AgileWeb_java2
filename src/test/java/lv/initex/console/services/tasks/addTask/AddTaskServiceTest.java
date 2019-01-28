@@ -60,7 +60,7 @@ public class AddTaskServiceTest {
     public void verifyThatDatabaseAddMethodWasCalledOnce() {
 
         AddTaskResponse response = service.add(request);
-        verify(database).addTask(any(Task.class));
+        verify(database).save(any(Task.class));
     }
 
     @Test

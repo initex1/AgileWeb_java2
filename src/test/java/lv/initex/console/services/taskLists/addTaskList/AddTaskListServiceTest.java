@@ -64,7 +64,7 @@ public class AddTaskListServiceTest {
     public void verifyThatDatabaseAddMethodWasCalledOnce() {
         AddTaskListResponse response = service.add(request);
 
-        verify(database).addTaskList(any(TaskList.class));
+        verify(database).save(any(TaskList.class));
     }
 
     @Test

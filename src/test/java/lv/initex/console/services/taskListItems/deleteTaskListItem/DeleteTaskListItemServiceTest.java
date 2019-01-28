@@ -91,12 +91,12 @@ public class DeleteTaskListItemServiceTest {
         Mockito.when(database.findByTaskListAndTask(taskList, task))
                 .thenReturn(Optional.of(item));
 
-        Mockito.when(database.deleteTaskListItem(item)).thenReturn(true);
+      //  Mockito.when(database.deleteTaskListItem(item)).thenReturn(true);
 
         DeleteTaskListItemResponse response = service.delete(request);
 
         verify(database).findByTaskListAndTask(taskList, task);
-        verify(database).deleteTaskListItem(item);
+      //  verify(database).deleteTaskListItem(item);
     }
 
 

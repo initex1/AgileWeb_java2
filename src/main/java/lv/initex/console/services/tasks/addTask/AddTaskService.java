@@ -26,7 +26,7 @@ public class AddTaskService {
         }
         Task task = new Task();
         task.setTaskTitle(request.getTaskTitle());
-        database.addTask(task);
+        database.save(task);
 
         return new AddTaskResponse(task.getId());
     }

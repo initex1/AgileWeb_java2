@@ -27,7 +27,7 @@ public class DeleteTaskService {
             return new DeleteTaskResponse(errors);
         }
         Task task = database.findTaskByTitle(request.getTaskTitle()).get();
-        database.deleteTask(task);
+        database.delete(task);
         return new DeleteTaskResponse(task.getId());
     }
 }

@@ -75,12 +75,11 @@ public class DeleteTaskServiceTest {
 
         task.setId(new Long("1"));
         Mockito.when(database.findTaskByTitle(task.getTaskTitle())).thenReturn(Optional.of(task));
-        Mockito.when(database.deleteTask(task)).thenReturn(true);
 
         DeleteTaskRequest request = new DeleteTaskRequest(task.getTaskTitle());
         DeleteTaskResponse response = service.delete(request);
         verify(database).findTaskByTitle(task.getTaskTitle());
-        verify(database).deleteTask(task);
+        verify(database).delete(task);
     }
 
     @Test

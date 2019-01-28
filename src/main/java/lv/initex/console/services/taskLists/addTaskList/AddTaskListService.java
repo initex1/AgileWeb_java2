@@ -27,7 +27,7 @@ public class AddTaskListService {
         TaskList taskList = new TaskList();
         taskList.setUser(request.getUser());
         taskList.setTaskTitle(request.getTaskListTitle());
-        database.addTaskList(taskList);
+        database.save(taskList);
 
         return new AddTaskListResponse(taskList.getId());
     }

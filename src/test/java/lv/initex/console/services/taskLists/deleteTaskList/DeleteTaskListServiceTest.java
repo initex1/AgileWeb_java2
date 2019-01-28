@@ -86,11 +86,8 @@ public class DeleteTaskListServiceTest {
 
         Mockito.when(database.findByUserAndTitle(user, "xxx")).thenReturn(Optional.of(taskList));
 
-        Mockito.when(database.deleteTaskList(taskList)).thenReturn(true);
-
         DeleteTaskListResponse response = service.delete(request);
 
         verify(database).findByUserAndTitle(user, "xxx");
-        verify(database).deleteTaskList(taskList);
     }
 }
