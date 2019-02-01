@@ -2,7 +2,6 @@ package lv.initex.console.services.taskLists.deleteTaskList;
 
 import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
-import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.DeleteTaskListValidator;
 import org.junit.Before;
@@ -23,8 +22,6 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteTaskListServiceTest {
 
-    private User user;
-
     private TaskList taskList;
 
     private DeleteTaskListRequest request;
@@ -40,7 +37,6 @@ public class DeleteTaskListServiceTest {
 
     @Before
     public void init() {
-      //  user = new User();
         taskList = new TaskList();
         request = new DeleteTaskListRequest(new Long(1), "xxx");
     }
@@ -57,7 +53,7 @@ public class DeleteTaskListServiceTest {
     }
 
     @Test
-    public void shouldReturnResponseWithTaskListIdAndNoErrorsList() {
+    public void shouldReturnResponseWithTaskListIdAndEmptyErrorsList() {
         taskList.setId(new Long(1));
 
         Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx")).thenReturn(Optional.of(taskList));
@@ -65,7 +61,7 @@ public class DeleteTaskListServiceTest {
         DeleteTaskListResponse response = service.delete(request);
 
         assertEquals(response.getTaskListId(), new Long(1));
-        assertNull(response.getErrors());
+        assert (response.getErrors().isEmpty());
     }
 
     @Test
