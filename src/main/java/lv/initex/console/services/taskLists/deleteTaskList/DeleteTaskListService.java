@@ -26,9 +26,8 @@ public class DeleteTaskListService {
             return new DeleteTaskListResponse(errors);
         }
         TaskList taskList = database.findByUserIdAndTitle(request.getUserId(), request.getTaskListTitle()).get();
-
         database.delete(taskList);
-        return new DeleteTaskListResponse(taskList.getId());
+        return new DeleteTaskListResponse(taskList.getId(), taskList.getTaskListTitle(), errors);
 
     }
 

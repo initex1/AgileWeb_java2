@@ -21,7 +21,6 @@ public class AddTaskListService {
 
     public AddTaskListResponse add(AddTaskListRequest request) {
         List<TaskListError> errors = validator.validate(request);
-
         if (!errors.isEmpty()) {
             return new AddTaskListResponse(errors);
         }
@@ -31,7 +30,7 @@ public class AddTaskListService {
         taskList.setUser(user);
         taskList.setTaskTitle(request.getTaskListTitle());
         database.save(taskList);
+        return new AddTaskListResponse(taskList.getId(), taskList.getTaskListTitle(), errors);
 
-        return new AddTaskListResponse(taskList.getId(), taskList.getTaskListTitle());
     }
 }

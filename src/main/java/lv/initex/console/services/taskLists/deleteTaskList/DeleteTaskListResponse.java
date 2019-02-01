@@ -6,10 +6,13 @@ import java.util.List;
 
 public class DeleteTaskListResponse {
     private Long taskListId;
+    private String taskListTitle;
     private List<TaskListError> errors;
 
-    public DeleteTaskListResponse(Long taskListId) {
+    public DeleteTaskListResponse(Long taskListId, String taskListTitle, List<TaskListError> errors) {
         this.taskListId = taskListId;
+        this.taskListTitle = taskListTitle;
+        this.errors = errors;
     }
 
     public DeleteTaskListResponse(List<TaskListError> errors) {
@@ -22,6 +25,14 @@ public class DeleteTaskListResponse {
 
     public void setTaskListId(Long taskListId) {
         this.taskListId = taskListId;
+    }
+
+    public String getTaskListTitle() {
+        return taskListTitle;
+    }
+
+    public void setTaskListTitle(String taskListTitle) {
+        this.taskListTitle = taskListTitle;
     }
 
     public List<TaskListError> getErrors() {

@@ -9,9 +9,10 @@ public class AddTaskListResponse {
     private String taskListTitle;
     private List<TaskListError> errors;
 
-    public AddTaskListResponse(Long taskListId, String taskListTitle) {
+    public AddTaskListResponse(Long taskListId, String taskListTitle, List<TaskListError> errors) {
         this.taskListId = taskListId;
         this.taskListTitle = taskListTitle;
+        this.errors=errors;
     }
 
     public AddTaskListResponse(List<TaskListError> errors) {

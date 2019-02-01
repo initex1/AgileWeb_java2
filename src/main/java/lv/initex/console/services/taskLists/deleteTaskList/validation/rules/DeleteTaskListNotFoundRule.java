@@ -18,7 +18,7 @@ public class DeleteTaskListNotFoundRule {
         if(userId!=null&&taskList!=null){
             Optional<TaskList> foundTaskList=database.findByUserIdAndTitle(userId, taskList);
             if(!foundTaskList.isPresent()){
-                TaskListError error = new TaskListError("TaskList", "No such taskList user!");
+                TaskListError error = new TaskListError("TaskList", "No such taskList for current user!");
                 return Optional.of(error);
             }
         }
