@@ -1,7 +1,6 @@
 package lv.initex.web.controller;
 
 
-import lv.initex.console.domain.TaskList;
 import lv.initex.console.services.taskLists.addTaskList.AddTaskListService;
 import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListService;
 import lv.initex.console.services.taskLists.getTaskLists.GetTaskListsService;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,8 +31,6 @@ public class TaskListController {
 
         TaskListDTO request = new TaskListDTO(userId, taskListTitle);
         TaskListResponseDTO response = addTaskListService.add(request);
-        System.out.println("Size is:"+response.getErrors());
-        System.out.println("e"+response.getErrors());
         if (!response.getErrors().isEmpty()) {
             throw new ValidationError(response.getErrors());
         }
@@ -56,7 +52,7 @@ public class TaskListController {
 
         TaskListDTO request = new TaskListDTO(userId);
         List<TaskListResponseDTO> response = getTaskListsService.getAllTaskLists(request);
-        if (response.get(0).getErrors()!=null) {
+        if (response.get(0).getErrors() != null) {
             throw new ValidationError(response.get(0).getErrors());
         }
         return response;
