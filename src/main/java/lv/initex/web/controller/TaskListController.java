@@ -47,7 +47,7 @@ public class TaskListController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{id}/taskLists")
+    @GetMapping(value = "/users/{id}/taskLists/")
     public List<TaskListResponseDTO> getAllTaskLists(@PathVariable("id") Long userId) throws ValidationError {
 
         TaskListDTO request = new TaskListDTO(userId);
