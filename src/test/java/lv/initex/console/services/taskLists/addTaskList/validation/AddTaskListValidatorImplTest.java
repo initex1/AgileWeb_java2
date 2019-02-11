@@ -2,7 +2,7 @@ package lv.initex.console.services.taskLists.addTaskList.validation;
 
 import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.addTaskList.AddTaskListRequest;
+import lv.initex.web.dtos.TaskListDTO;
 import lv.initex.console.services.taskLists.addTaskList.validation.rules.AddDuplicateTaskListTitleRule;
 import lv.initex.console.services.taskLists.addTaskList.validation.rules.AddEmptyTaskListTitleRule;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class AddTaskListValidatorImplTest {
     @Test
     public void shouldReturnCollectAndReturnErrors() {
         User user = new User();
-        AddTaskListRequest request=new AddTaskListRequest(new Long(1),"xxx");
+        TaskListDTO request=new TaskListDTO(new Long(1),"xxx");
 
         Mockito.when(addEmptyTaskListTitleRule.execute("xxx"))
                 .thenReturn(Optional.of(new TaskListError("title", "empty")));

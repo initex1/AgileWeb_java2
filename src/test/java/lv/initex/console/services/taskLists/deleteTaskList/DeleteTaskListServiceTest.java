@@ -4,6 +4,8 @@ import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
 import lv.initex.console.services.TaskListError;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.DeleteTaskListValidator;
+import lv.initex.web.dtos.TaskListDTO;
+import lv.initex.web.dtos.TaskListResponseDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,7 @@ public class DeleteTaskListServiceTest {
 
     private TaskList taskList;
 
-    private DeleteTaskListRequest request;
+    private TaskListDTO request;
 
     @Mock
     private TaskListRepository database;
@@ -38,7 +40,7 @@ public class DeleteTaskListServiceTest {
     @Before
     public void init() {
         taskList = new TaskList();
-        request = new DeleteTaskListRequest(new Long(1), "xxx");
+        request = new TaskListDTO(new Long(1), "xxx");
     }
 
     @Test
@@ -46,7 +48,7 @@ public class DeleteTaskListServiceTest {
         Mockito.when(validator.validate(request))
                 .thenReturn(Arrays.asList(new TaskListError("title", "empty")));
 
-        DeleteTaskListResponse response = service.delete(request);
+        TaskListResponseDTO response = service.delete(request);
 
         assertNull(response.getTaskListId());
         assertEquals(response.getErrors().size(), 1);
@@ -58,7 +60,7 @@ public class DeleteTaskListServiceTest {
 
         Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx")).thenReturn(Optional.of(taskList));
 
-        DeleteTaskListResponse response = service.delete(request);
+        TaskListResponseDTO response = service.delete(request);
 
         assertEquals(response.getTaskListId(), new Long(1));
         assert (response.getErrors().isEmpty());
@@ -71,7 +73,7 @@ public class DeleteTaskListServiceTest {
         Mockito.when(validator.validate(request))
                 .thenReturn(Arrays.asList(new TaskListError("title", "empty")));
 
-        DeleteTaskListResponse response = service.delete(request);
+        TaskListResponseDTO response = service.delete(request);
 
         verify(validator).validate(request);
     }
@@ -82,7 +84,7 @@ public class DeleteTaskListServiceTest {
 
         Mockito.when(database.findByUserIdAndTitle(new Long(1), "xxx")).thenReturn(Optional.of(taskList));
 
-        DeleteTaskListResponse response = service.delete(request);
+        TaskListResponseDTO response = service.delete(request);
 
         verify(database).findByUserIdAndTitle(new Long(1), "xxx");
     }

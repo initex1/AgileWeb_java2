@@ -1,10 +1,10 @@
 package lv.initex.console.services.taskLists.deleteTaskList.validation;
 
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListRequest;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListNoUserRule;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListNotFoundRule;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListTitleEmtyRule;
+import lv.initex.web.dtos.TaskListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,11 +25,11 @@ public class DeleteTaskListValidatorImpl implements DeleteTaskListValidator {
 
 
     @Override
-    public List<TaskListError> validate(DeleteTaskListRequest request) {
+    public List<TaskListError> validate(TaskListDTO taskListDTO) {
         List<TaskListError> errors = new ArrayList<>();
-        deleteTaskListTitleEmtyRule.execute(request.getTaskListTitle()).ifPresent(errors::add);
-        deleteTaskListNoUserRule.execute(request.getUserId()).ifPresent(errors::add);
-        deleteTaskListNotFoundRule.execute(request.getUserId(), request.getTaskListTitle()).ifPresent(errors::add);
+        deleteTaskListTitleEmtyRule.execute(taskListDTO.getTaskListTitle()).ifPresent(errors::add);
+        deleteTaskListNoUserRule.execute(taskListDTO.getUserId()).ifPresent(errors::add);
+        deleteTaskListNotFoundRule.execute(taskListDTO.getUserId(), taskListDTO.getTaskListTitle()).ifPresent(errors::add);
         return errors;
     }
 }

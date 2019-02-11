@@ -1,11 +1,11 @@
 package lv.initex.console.services.taskLists.deleteTaskList.validation;
 
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListRequest;
+import lv.initex.web.dtos.TaskListDTO;
 
 import java.util.List;
 
 public interface DeleteTaskListValidator {
 
-    List<TaskListError> validate(DeleteTaskListRequest request);
+    List<TaskListError> validate(TaskListDTO taskListDTO);
 }

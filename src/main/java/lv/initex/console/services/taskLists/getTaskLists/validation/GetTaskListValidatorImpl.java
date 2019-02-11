@@ -1,8 +1,8 @@
 package lv.initex.console.services.taskLists.getTaskLists.validation;
 
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.getTaskLists.GetTaskListRequest;
 import lv.initex.console.services.taskLists.getTaskLists.validation.rules.GetTaskListEmptyRule;
+import lv.initex.web.dtos.TaskListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +16,9 @@ public class GetTaskListValidatorImpl implements GetTaskListValidator {
     private GetTaskListEmptyRule getTaskListEmptyRule;
 
     @Override
-    public List<TaskListError> validate(GetTaskListRequest request) {
+    public List<TaskListError> validate(TaskListDTO tasklistDTO) {
         List<TaskListError> errors = new ArrayList<>();
-        getTaskListEmptyRule.execute(request.getUserId()).ifPresent(errors::add);
+        getTaskListEmptyRule.execute(tasklistDTO.getUserId()).ifPresent(errors::add);
         return errors;
     }
 }

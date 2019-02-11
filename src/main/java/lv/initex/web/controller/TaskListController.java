@@ -2,16 +2,11 @@ package lv.initex.web.controller;
 
 
 import lv.initex.console.domain.TaskList;
-import lv.initex.console.services.taskLists.addTaskList.AddTaskListRequest;
-import lv.initex.console.services.taskLists.addTaskList.AddTaskListResponse;
 import lv.initex.console.services.taskLists.addTaskList.AddTaskListService;
-import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListRequest;
-import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListResponse;
 import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListService;
-import lv.initex.console.services.taskLists.getTaskLists.GetTaskListRequest;
-import lv.initex.console.services.taskLists.getTaskLists.GetTaskListResponse;
 import lv.initex.console.services.taskLists.getTaskLists.GetTaskListsService;
 import lv.initex.web.dtos.TaskListDTO;
+import lv.initex.web.dtos.TaskListResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,41 +28,38 @@ public class TaskListController {
     private GetTaskListsService getTaskListsService;
 
 
-    @PostMapping(value = "/users/{id}/taskList")
-    public ResponseEntity<TaskListDTO> add(@PathVariable("id") Long userId, @RequestParam("title") String taskListTitle) throws ValidationError {
+    @PostMapping(value = "/users/{id}/taskLists/{title}")
+    public ResponseEntity<TaskListResponseDTO> add(@PathVariable("id") Long userId, @PathVariable("title") String taskListTitle) throws ValidationError {
 
-        AddTaskListRequest request = new AddTaskListRequest(userId, taskListTitle);
-        AddTaskListResponse response = addTaskListService.add(request);
+        TaskListDTO request = new TaskListDTO(userId, taskListTitle);
+        TaskListResponseDTO response = addTaskListService.add(request);
+        System.out.println("Size is:"+response.getErrors());
+        System.out.println("e"+response.getErrors());
         if (!response.getErrors().isEmpty()) {
             throw new ValidationError(response.getErrors());
         }
-        return ResponseEntity.ok(new TaskListDTO(response.getTaskListId(), response.getTaskListTitle()));
+        return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/users/{id}/taskList")
-    public ResponseEntity<TaskListDTO> delete(@PathVariable("id") Long userId, @RequestParam("title") String taskListTitle) throws ValidationError {
-        DeleteTaskListRequest request = new DeleteTaskListRequest(userId, taskListTitle);
-        DeleteTaskListResponse response = deleteTaskListService.delete(request);
+    @DeleteMapping(value = "/users/{id}/taskLists/{title}")
+    public ResponseEntity<TaskListResponseDTO> delete(@PathVariable("id") Long userId, @PathVariable("title") String taskListTitle) throws ValidationError {
+        TaskListDTO request = new TaskListDTO(userId, taskListTitle);
+        TaskListResponseDTO response = deleteTaskListService.delete(request);
         if (!response.getErrors().isEmpty()) {
             throw new ValidationError(response.getErrors());
         }
-        TaskListDTO taskListDTO = new TaskListDTO(response.getTaskListId(), response.getTaskListTitle());
-        return new ResponseEntity<>(taskListDTO, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/users/{id}/taskLists")
-    public List<TaskListDTO> getAllTaskLists(@PathVariable("id") Long userId) throws ValidationError {
+    public List<TaskListResponseDTO> getAllTaskLists(@PathVariable("id") Long userId) throws ValidationError {
 
-        GetTaskListRequest request = new GetTaskListRequest(userId);
-        GetTaskListResponse response = getTaskListsService.getAllTaskLists(request);
-        if (!response.getErrors().isEmpty()) {
-            throw new ValidationError(response.getErrors());
+        TaskListDTO request = new TaskListDTO(userId);
+        List<TaskListResponseDTO> response = getTaskListsService.getAllTaskLists(request);
+        if (response.get(0).getErrors()!=null) {
+            throw new ValidationError(response.get(0).getErrors());
         }
-        List<TaskListDTO> list = new ArrayList<>();
-        for (TaskList taskList : response.getTaskList()) {
-            list.add(new TaskListDTO(taskList.getId(), taskList.getTaskListTitle()));
-        }
-        return list;
+        return response;
     }
 
 

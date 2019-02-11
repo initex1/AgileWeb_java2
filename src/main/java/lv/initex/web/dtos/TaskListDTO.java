@@ -1,34 +1,31 @@
 package lv.initex.web.dtos;
 
 public class TaskListDTO {
+    private Long userId;
+    private String taskListTitle;
 
-    private Long id;
-    private String listTitle;
-
-
-    public TaskListDTO(Long id){
-        this.id = id;
+    public TaskListDTO(Long userId) {
+        this.userId = userId;
     }
 
-    public TaskListDTO(Long id,  String listTitle) {
-        this.id = id;
-        this.listTitle=listTitle;
+    public TaskListDTO(Long userId, String taskListTitle) {
+        this.userId = userId;
+        this.taskListTitle = taskListTitle;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getListTitle() {
-        return listTitle;
+    public String getTaskListTitle() {
+        return taskListTitle;
     }
 
-    public void setListTitle(String listTitle) {
-        this.listTitle = listTitle;
+    public void setTaskListTitle(String taskListTitle) {
+        this.taskListTitle = taskListTitle;
     }
-
 }

@@ -5,6 +5,8 @@ import lv.initex.console.domain.TaskList;
 import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
 import lv.initex.console.services.taskLists.addTaskList.validation.AddTaskListValidator;
+import lv.initex.web.dtos.TaskListDTO;
+import lv.initex.web.dtos.TaskListResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,18 +21,18 @@ public class AddTaskListService {
     @Autowired
     private AddTaskListValidator validator;
 
-    public AddTaskListResponse add(AddTaskListRequest request) {
-        List<TaskListError> errors = validator.validate(request);
+    public TaskListResponseDTO add(TaskListDTO taskListDTO) {
+        List<TaskListError> errors = validator.validate(taskListDTO);
         if (!errors.isEmpty()) {
-            return new AddTaskListResponse(errors);
+            return new TaskListResponseDTO(errors);
         }
         User user = new User();
-        user.setId(request.getUserId());
+        user.setId(taskListDTO.getUserId());
         TaskList taskList = new TaskList();
         taskList.setUser(user);
-        taskList.setTaskTitle(request.getTaskListTitle());
+        taskList.setTaskTitle(taskListDTO.getTaskListTitle());
         database.save(taskList);
-        return new AddTaskListResponse(taskList.getId(), taskList.getTaskListTitle(), errors);
+        return new TaskListResponseDTO(taskList.getId(), taskList.getTaskListTitle(), errors);
 
     }
 }

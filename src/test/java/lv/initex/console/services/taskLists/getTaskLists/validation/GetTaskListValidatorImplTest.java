@@ -1,9 +1,8 @@
 package lv.initex.console.services.taskLists.getTaskLists.validation;
 
-import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.getTaskLists.GetTaskListRequest;
 import lv.initex.console.services.taskLists.getTaskLists.validation.rules.GetTaskListEmptyRule;
+import lv.initex.web.dtos.TaskListDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ public class GetTaskListValidatorImplTest {
 
   //  private User user;
 
-    private GetTaskListRequest request;
+    private TaskListDTO request;
 
     @Mock
     private GetTaskListEmptyRule getTaskListEmptyRule;
@@ -33,7 +32,7 @@ public class GetTaskListValidatorImplTest {
     @Before
     public void init() {
      //   user = new User();
-        request = new GetTaskListRequest(new Long(1));
+        request = new TaskListDTO(new Long(1));
     }
 
     @Test

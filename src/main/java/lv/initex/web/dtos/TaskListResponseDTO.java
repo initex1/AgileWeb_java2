@@ -1,21 +1,26 @@
-package lv.initex.console.services.taskLists.addTaskList;
+package lv.initex.web.dtos;
 
 import lv.initex.console.services.TaskListError;
 
 import java.util.List;
 
-public class AddTaskListResponse {
+public class TaskListResponseDTO {
     private Long taskListId;
     private String taskListTitle;
     private List<TaskListError> errors;
 
-    public AddTaskListResponse(Long taskListId, String taskListTitle, List<TaskListError> errors) {
+    public TaskListResponseDTO(Long taskListId, String taskListTitle) {
         this.taskListId = taskListId;
         this.taskListTitle = taskListTitle;
-        this.errors=errors;
     }
 
-    public AddTaskListResponse(List<TaskListError> errors) {
+    public TaskListResponseDTO(Long taskListId, String taskListTitle, List<TaskListError> errors) {
+        this.taskListId = taskListId;
+        this.taskListTitle = taskListTitle;
+        this.errors = errors;
+    }
+
+    public TaskListResponseDTO(List<TaskListError> errors) {
         this.errors = errors;
     }
 

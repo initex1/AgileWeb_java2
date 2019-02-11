@@ -4,6 +4,8 @@ import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
 import lv.initex.console.services.TaskListError;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.DeleteTaskListValidator;
+import lv.initex.web.dtos.TaskListDTO;
+import lv.initex.web.dtos.TaskListResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,16 +20,16 @@ public class DeleteTaskListService {
     @Autowired
     private DeleteTaskListValidator validator;
 
-    public DeleteTaskListResponse delete(DeleteTaskListRequest request) {
+    public TaskListResponseDTO delete(TaskListDTO taskListDTO) {
 
-        List<TaskListError> errors = validator.validate(request);
+        List<TaskListError> errors = validator.validate(taskListDTO);
 
         if (!errors.isEmpty()) {
-            return new DeleteTaskListResponse(errors);
+            return new TaskListResponseDTO(errors);
         }
-        TaskList taskList = database.findByUserIdAndTitle(request.getUserId(), request.getTaskListTitle()).get();
+        TaskList taskList = database.findByUserIdAndTitle(taskListDTO.getUserId(), taskListDTO.getTaskListTitle()).get();
         database.delete(taskList);
-        return new DeleteTaskListResponse(taskList.getId(), taskList.getTaskListTitle(), errors);
+        return new TaskListResponseDTO(taskList.getId(), taskList.getTaskListTitle(), errors);
 
     }
 

@@ -2,10 +2,10 @@ package lv.initex.console.services.taskLists.addTaskList;
 
 import lv.initex.console.database.TaskListRepository;
 import lv.initex.console.domain.TaskList;
-import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskListItems.addTaskListItem.AddTaskListItemService;
 import lv.initex.console.services.taskLists.addTaskList.validation.AddTaskListValidator;
+import lv.initex.web.dtos.TaskListDTO;
+import lv.initex.web.dtos.TaskListResponseDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,13 +16,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,7 +27,7 @@ public class AddTaskListServiceTest {
 
   //  private User user;
 
-    private AddTaskListRequest request;
+    private TaskListDTO request;
 
     @Mock
     private TaskListRepository database;
@@ -44,7 +41,7 @@ public class AddTaskListServiceTest {
     @Before
     public void init() {
        // user = new User();
-        request = new AddTaskListRequest(new Long(1), "xxx");
+        request = new TaskListDTO(new Long(1), "xxx");
     }
 
     @Test
@@ -54,7 +51,7 @@ public class AddTaskListServiceTest {
         Mockito.when(validator.validate(request))
                 .thenReturn(errors);
 
-        AddTaskListResponse response = service.add(request);
+        TaskListResponseDTO response = service.add(request);
 
         assertNull(response.getTaskListId());
         assertEquals(1, response.getErrors().size());
@@ -62,14 +59,14 @@ public class AddTaskListServiceTest {
 
     @Test
     public void verifyThatDatabaseAddMethodWasCalledOnce() {
-        AddTaskListResponse response = service.add(request);
+        TaskListResponseDTO response = service.add(request);
 
         verify(database).save(any(TaskList.class));
     }
 
     @Test
     public void verifyThatValidatorWasCalledOnce() {
-        AddTaskListResponse response = service.add(request);
+        TaskListResponseDTO response = service.add(request);
 
         verify(validator).validate(request);
     }

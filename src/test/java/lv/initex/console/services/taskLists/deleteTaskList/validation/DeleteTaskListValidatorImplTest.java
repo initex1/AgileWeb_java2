@@ -2,10 +2,10 @@ package lv.initex.console.services.taskLists.deleteTaskList.validation;
 
 import lv.initex.console.domain.User;
 import lv.initex.console.services.TaskListError;
-import lv.initex.console.services.taskLists.deleteTaskList.DeleteTaskListRequest;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListNoUserRule;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListNotFoundRule;
 import lv.initex.console.services.taskLists.deleteTaskList.validation.rules.DeleteTaskListTitleEmtyRule;
+import lv.initex.web.dtos.TaskListDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ public class DeleteTaskListValidatorImplTest {
     public void shouldReturnCollectAndReturnErrors() {
         User user = new User();
 
-        DeleteTaskListRequest request = new DeleteTaskListRequest(new Long(1), "xxx");
+        TaskListDTO request = new TaskListDTO(new Long(1), "xxx");
 
         Mockito.when(deleteTaskListNoUserRule.execute(request.getUserId()))
                 .thenReturn(Optional.of(new TaskListError("zzz", "aaa")));
